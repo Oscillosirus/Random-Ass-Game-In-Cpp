@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include <json.hpp>
+#include <nlohmann/json.hpp>
 using json = nlohmann::json;
 using namespace std;
 using namespace nlohmann::literals;
@@ -13,6 +13,7 @@ json readJsonFile(const string& filename){
   if (file.is_open()) {
     file >> data;
     file.close();
+    cout << "Reading Data From Json";
   } else {
     cerr << "File Could Not Be Opened" << filename;
   }
@@ -25,12 +26,14 @@ void writeJsonFile(const string& filename, const json& data_to_write) {
     file << setw(4) << data_to_write;
     file.close();
     cout << "Writing Data To Json";
+  } else {
+    cerr << "File Could Not Be Opened" << filename;
   }
  }
 
 string quotes = " you are \"gay\".";
 string fullname;
-json config_data = readJsonFile("Data.json");
+json config_data = readJsonFile("Profiles.json");
 int Stored_PassKey = 0;
 
 bool y_n(string prompt = "y/n?: " ) {
@@ -54,7 +57,7 @@ class PassKeyStuff {
     int Passkey() {
       int PassKey;
       while (true) {
-        json config_data = readJsonFile("Data.json");
+        json config_data = readJsonFile("Profiles.json");
           if (!config_data.empty()) {
             cout << "Writing Json Data To Script" << "\n";
               if (config_data.contains("Stored_PassKey")) {
@@ -85,10 +88,10 @@ int Passkey_Changer() {
         cin >> Stored_PassKey;
         bool confirm_change = y_n("Confirm Passkey Change. y/n: ");
         if (confirm_change == true) {
-          json config_data = readJsonFile("Data.json");
+          json config_data = readJsonFile("Profiles.json");
           if (!config_data.empty() && config_data.contains("Stored_PassKey")) {
             config_data["Stored_PassKey"] = Stored_PassKey;
-            writeJsonFile("Data.json", config_data);
+            writeJsonFile("Profiles.json", config_data);
             cout << "\n" << "Passkey Successfully Changed To" << " " << Stored_PassKey << "\n\n";
       }
   } else if (change_passkey == false) {
@@ -97,6 +100,7 @@ int Passkey_Changer() {
         }
 }
   }
+  return 0;
 }
 
 string Create_Account() {
@@ -125,7 +129,7 @@ string Create_Account() {
       cerr << "Passkeys Do Not Match";
   } while (New_Passkey != Passkey_Confirm);
 
-  json config_data = readJsonFile("Data.json");
+  json config_data = readJsonFile("Profiles.json");
   if (config_data.empty()) {
     cout << "Failed To Load Data";
     }
@@ -147,7 +151,7 @@ string Create_Account() {
   }
   config_data["Accounts"].push_back(new_accounts);
   config_data["Account_Count"] = current_id + 1;
-  writeJsonFile("Data.json", config_data);
+  writeJsonFile("Profiles.json", config_data);
   cout << "Accout Under " << New_Username << " Created Successfully";
   return New_Username;
 }
@@ -159,7 +163,7 @@ string Login() {
   string username;
   string failed;
   string passkey;
-  json login_details = readJsonFile("Data.json");
+  json login_details = readJsonFile("Profiles.json");
   if (login_details.contains ("Accounts"))
   cout << "Enter Username: ";
   cin >> Username;
@@ -201,7 +205,7 @@ string Deltete_Account(){
 */
 
 int main() {
-  json config_data = readJsonFile("Data.json");
+  json config_data = readJsonFile("Profiles.json");
   if (!config_data.empty()) {
     cout << "Writing Json Data To Script" << "\n";
      if (config_data.contains("Stored_PassKey")) {
