@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "C:/Users/jalen/OneDrive/Documents/GitHub/Random-Ass-Game-In-Cpp",
-      "program": "C:/Users/jalen/OneDrive/Documents/GitHub/Random-Ass-Game-In-Cpp/build/Debug/outDebug",
+      "cwd": "${workspaceFolder}/build/Debug",
+      "program": "${workspaceFolder}/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

@@ -33,7 +33,6 @@ void writeJsonFile(const string& filename, const json& data_to_write) {
 
 string quotes = " you are \"gay\".";
 string fullname;
-json config_data = readJsonFile("Profiles.json");
 int Stored_PassKey = 0;
 
 bool y_n(string prompt = "y/n?: " ) {
