@@ -11,6 +11,7 @@ json readJsonFile(const string& filename){
   ifstream file(filename);
   json data;
   if (file.is_open()) {
+<<<<<<< HEAD
     try {
       // Use the extraction operator to read the JSON
       file >> data;
@@ -21,6 +22,11 @@ json readJsonFile(const string& filename){
       cerr << "JSON Parse Error in " << filename << ": " << e.what() 
                 << " at byte " << e.byte;
     }
+=======
+    file >> data;
+    file.close();
+    cout << "Reading Data From Json";
+>>>>>>> 140f9c70c761843d23d63e6addf69f6b538db965
   } else {
     cerr << "File Could Not Be Opened: " << filename;
   }

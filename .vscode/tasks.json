@@ -13,7 +13,11 @@
                 ""
             ],
             "options": {
+<<<<<<< HEAD
                 "cwd": "C:/msys64/ucrt64/bin"
+=======
+                "cwd": "${fileDirname}"
+>>>>>>> 140f9c70c761843d23d63e6addf69f6b538db965
             },
             "problemMatcher": [
                 "$gcc"
